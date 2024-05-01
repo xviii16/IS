@@ -1,0 +1,10 @@
+!pip install pycryptodomex
+from Cryptodome.Cipher import AES
+
+key = b'C&F)H@McQfTjWnZr'
+cipher = AES.new(key, AES.MODE_EAX)
+data = "Welcome to AES".encode()
+nonce = cipher.nonce
+ciphertext = cipher.encrypt(data)
+
+print("Cipher text:", ciphertext)

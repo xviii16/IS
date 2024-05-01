@@ -1,0 +1,135 @@
+//java
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\t\tRAIL FENCE TECHNIQUE");
+        System.out.println("\nEnter the input string:");
+        String input = scanner.nextLine();
+
+        int length = input.length();
+        char[] inputChars = input.toCharArray();
+        char[] cipherChars = new char[length];
+
+        // Ciphering
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+            if (i % 2 == 0) {
+                cipherChars[j++] = inputChars[i];
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            if (i % 2 == 1) {
+                cipherChars[j++] = inputChars[i];
+            }
+        }
+
+        String cipherText = new String(cipherChars);
+        System.out.println("\nCiphertext after applying rail fence:");
+        System.out.println(cipherText);
+
+        // Deciphering
+        char[] decipherChars = new char[length];
+        int midPoint = (length + 1) / 2;
+        for (int i = 0, k = 0; i < midPoint; i++, k += 2) {
+            decipherChars[k] = cipherChars[i];
+        }
+        for (int i = midPoint, k = 1; i < length; i++, k += 2) {
+            decipherChars[k] = cipherChars[i];
+        }
+
+        String decipherText = new String(decipherChars);
+        System.out.println("\nText after decryption:");
+        System.out.println(decipherText);
+
+        scanner.close();
+    }
+}
+
+
+
+
+//c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+    int i, j, k, l;
+    char a[20], c[20], d[20];
+    
+    printf("\n\t\tRAIL FENCE TECHNIQUE");
+    printf("\n\nEnter the input string:");
+    gets(a);
+    
+    l = strlen(a);
+    
+    /* Ciphering */
+    for (i = 0, j = 0; i < l; i++) {
+        if (i % 2 == 0) {
+            c[j++] = a[i];
+        }
+    }
+    for (i = 0; i < l; i++) {
+        if (i % 2 == 1) {
+            c[j++] = a[i];
+        }
+    }
+    c[j] = '\0';
+    printf("\nCiphertext after applying rail fence:");
+    printf("\n%s", c);
+    
+    /* Deciphering */
+    if (l % 2 == 0) {
+        k = l / 2;
+    } else {
+        k = (l / 2) + 1;
+    }
+    for (i = 0, j = 0; i < k; i++) {
+        d[j] = c[i];
+        j = j + 2;
+    }
+    for (i = k, j = 1; i < l; i++) {
+        d[j] = c[i];
+        j = j + 2;
+    }
+    d[l] = '\0';
+    printf("\nText after decryption:");
+    printf("%s", d);
+    
+    return 0;
+}
+
+
+
+#python
+a = input("Enter the input string: ")
+l = len(a)
+c = ""
+
+# Ciphering
+for i in range(l):
+    if i % 2 == 0:
+        c += a[i]
+for i in range(l):
+    if i % 2 == 1:
+        c += a[i]
+
+print("Cipher text after applying rail fence:", c)
+
+# Deciphering
+if l % 2 == 0:
+    k = l // 2
+else:
+    k = (l // 2) + 1
+
+d = ""
+for i in range(k):
+    if i < len(c):
+        d += c[i]
+    if i + k < len(c):
+        d += c[i + k]
+
+print("Text after decryption:", d)
+

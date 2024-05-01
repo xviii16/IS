@@ -1,0 +1,90 @@
+//java
+public class Main {
+    public static void main(String[] args) {
+        int p = 3;
+        int q = 7;
+
+        int n = p * q;
+        System.out.println("n = " + n);
+
+        int phi = (p - 1) * (q - 1);
+
+        int e = 2;
+        while (e < phi) {
+            if (gcd(e, phi) == 1) {
+                break;
+            }
+            e++;
+        }
+        System.out.println("e = " + e);
+        
+        int d=0;
+        for(int i=0;i<n;i++){
+            if((i*e)%phi==1){
+                d=i;
+                break;
+            }
+        }
+        System.out.println("d = " + d);
+        System.out.println("Public key: (" + e + ", " + n + ")");
+        System.out.println("Private key: (" + d + ", " + n + ")");
+
+        int msg = 11;
+        System.out.println("Original message: " + msg);
+
+        int C =(int)(Math.pow(msg, e)%n);
+        System.out.println("Encrypted message: " + C);
+
+        int M =(int)(Math.pow(C, d)%n);
+        System.out.println("Decrypted message: " + M);
+    }
+
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+
+}
+
+
+
+
+
+
+
+#python
+from math import gcd, fmod
+
+p = 3
+q = 7
+
+n = p * q
+print("n =", n)
+
+phi = (p - 1) * (q - 1)
+
+e = 2
+while e < phi:
+    if gcd(e, phi) == 1:
+        break
+    e += 1
+print("e =", e)
+
+k = 2
+d = ((k * phi) + 1) // e
+print("d =", d)
+print("Public key: (%d, %d)" % (e, n))
+print("Private key: (%d, %d)" % (d, n))
+
+msg = 11
+print("Original message:", msg)
+
+C = pow(msg, e, n)
+print("Encrypted message:", C)
+
+M = pow(C, d, n)
+print("Decrypted message:", M)
